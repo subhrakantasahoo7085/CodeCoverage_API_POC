@@ -13,6 +13,6 @@ app.get('/api/users', async (req, res) => {
   }
 });
 
-console.log('✅ app.js loaded and executed');
+console.log('app.js loaded and executed');
 
 export default app;
