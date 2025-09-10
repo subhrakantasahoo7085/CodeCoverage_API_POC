@@ -1,5 +1,5 @@
 {
-  "name": "code-coverage-api-testing-framework",
+  "name": "Code-Coverage-Framework",
   "version": "1.0.0",
   "type": "module",
   "main": "index.js",
@@ -8,12 +8,15 @@
     "test:e2e": "wdio run wdio.conf.js",
     "test:api": "mocha test/api/*.js",
     "coverage": "nyc mocha --require @babel/register test/api/*.js",
-    "report:all": "npm run coverage && npx nyc report --reporter=html && start coverage/index.html"
+    "report":"npx nyc report --reporter=html --silent --report-dir ./coverage --clean",
+    "report:all": "npm run dev & npm run report",
+    "dev": "concurrently \"node test/utils/server.js\" \"npm run coverage && npx nyc report --reporter=html --report-dir ./coverage\"",
+    "qa": "node test/utils/server.js & npm run coverage && npx nyc report --reporter=html --silent --report-dir ./coverage --clean && echo 'Report generated!' && start ./coverage/index.html"
   },
   "keywords": [],
   "author": "Subhrakanta Sahoo",
   "license": "ISC",
-  "description": "",
+  "description": "API testing with code coverage using nyc and mocha",
   "devDependencies": {
     "@babel/core": "^7.27.4",
     "@babel/preset-env": "^7.27.2",
@@ -30,6 +33,7 @@
     "webdriverio": "^9.15.0"
   },
   "dependencies": {
+    "concurrently": "^9.2.1",
     "express": "^5.1.0"
   }
 }
